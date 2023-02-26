@@ -13,8 +13,8 @@ class Message extends Model
 
     protected $fillable = [
         'message',
-        'userId',
-        'projectId'
+        'user_id',
+        'project_id'
     ];
 
     /*public function user() {

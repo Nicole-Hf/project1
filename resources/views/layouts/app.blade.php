@@ -5,19 +5,19 @@
         @if (in_array(request()->route()->getName(),['static-sign-up', 'sign-up'],))
             @include('layouts.navbars.guest.sign-up')
             {{ $slot }}
-            @include('layouts.footers.guest.with-socials')
+            {{--@include('layouts.footers.guest.with-socials')--}}
             {{-- If the user is authenticated on the static sign in or the login page --}}
         @elseif (in_array(request()->route()->getName(),['sign-in', 'login'],))
             @include('layouts.navbars.guest.login')
             {{ $slot }}
-            @include('layouts.footers.guest.description')
+            {{--@include('layouts.footers.guest.description')--}}
         @elseif (in_array(request()->route()->getName(),['profile', 'my-profile'],))
 
-            @include('components.plugins.fixed-plugin')
+            {{--@include('components.plugins.fixed-plugin')--}}
         @else
 
             @include('layouts.navbars.auth.nav')
-            @include('components.plugins.fixed-plugin')
+            {{--@include('components.plugins.fixed-plugin')--}}
             {{ $slot }}
 
         @endif
@@ -38,7 +38,7 @@
             <div>
                 @include('layouts.navbars.guest.sign-up')
                 {{ $slot }}
-                @include('layouts.footers.guest.with-socials')
+                {{--@include('layouts.footers.guest.with-socials')--}}
             </div>
         @endif
     @endguest

@@ -9,11 +9,11 @@ class Collaborator extends Model
 {
     use HasFactory;
 
-    protected $table = "collaborators";
+    protected $table = "project_user";
 
     protected $fillable = [
-        'userId',
-        'projectId'
+        'user_id',
+        'project_id'
     ];
 
     /*public function user() {
