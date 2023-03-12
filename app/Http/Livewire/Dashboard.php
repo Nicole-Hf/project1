@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Project;
-use App\Models\Collaborator;
+use App\Models\ProjectUser;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
@@ -68,18 +68,18 @@ class Dashboard extends Component
     public function showProject($projectId)
     {
         $this->projectId = $projectId;
-        $this->users = DB::table('users')->join('collaborators', 'collaborators.user_id', '=', 'users.id')
-        ->where('collaborators.project_id', $projectId)
-        ->select('users.id', 'users.name', 'users.email', 'collaborators.project_id')->get();
+        $this->users = DB::table('users')->join('project_user', 'project_user.user_id', '=', 'users.id')
+        ->where('project_user.project_id', $projectId)
+        ->select('users.id', 'users.name', 'users.email', 'project_user.project_id')->get();
         $this->modalUsers = true;
     }
 
     public function updateShowUsers($projectId)
     {
         $this->users = DB::table('users')
-        ->join('collaborators', 'collaborators.user_id', '=','users.id')
-        ->where('collaborators.project_id',$proyecto_id)
-        ->select('users.id','users.name','users.email','collaborators.project_id')->get();
+        ->join('project_user', 'project_user.user_id', '=','users.id')
+        ->where('project_user.project_id',$proyecto_id)
+        ->select('users.id','users.name','users.email','project_user.project_id')->get();
     }
 
     public function shareProject($code)
@@ -115,7 +115,7 @@ class Dashboard extends Component
             $this->modalError = true;
         } else {
             $project = Project::where("code", $this->code)->get()->first();
-            $collaborator = Collaborator::where("user_id", auth()->user()->id)
+            $collaborator = ProjectUser::where("user_id", auth()->user()->id)
                 ->where("project_id", $project->id)->get()->first();
 
             if ($project && $collaborator == null) {
@@ -187,7 +187,7 @@ class Dashboard extends Component
 
     public function destroyCollaborator($user, $project)
     {
-        $collaborator = Collaborator::where([
+        $collaborator = ProjectUser::where([
             "user_id" => $user,
             "project_id" => $project
         ])->get()->first();

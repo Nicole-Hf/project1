@@ -27,7 +27,7 @@
                         <button class="btn btn-primary mb-0" wire:click="$set('modalCreate', true)">Crear
                             proyecto</button>
                         @else
-                        <button class="btn btn-secondary mb-0" wire:click="$set('modalUnirse', true)">Unirse a
+                        <button class="btn btn-secondary mb-0" wire:click="$set('modalJoin', true)">Unirse a
                             un proyecto</button>
                         @endif
                     </div>
